@@ -1,0 +1,32 @@
+dockversion: "3"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://${DOMAIN_NAME}'
+    ports:
+      - 80:80
+    volumes:
+      - ./gitlab/config:/etc/gitlab
+      - ./gitlab/logs:/var/log/gitlab
+      - ./gitlab/data:/var/opt/gitlab
+    restart: always
+
+  git-runner:
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    links:
+      - gitlab
+
+  postgresql:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: gitlab
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: gitlabhq_production
+    restart: always
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
