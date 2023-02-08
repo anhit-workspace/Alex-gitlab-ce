@@ -3,19 +3,14 @@ services:
     gitlab:
       image: gitlab/gitlab-ce:latest
       hostname: 'localhost'
-      environment:
-        TZ: 'Asia/Ho_Chi_Minh'
-        GITLAB_OMNIBUS_CONFIG: |
-          external_url 'localhost'
-          gitlab_rails['time_zone'] = 'Asia/Ho_Chi_Minh'
       ports:
-        - '8080:80'
-        - '443:443'
-        - '1022:22'
+        - '18891:80'
+        - '18892:443'
+        - '18893:22'
       volumes:
-        - ./gitlab/config:/etc/gitlab
-        - ./gitlab/logs:/var/log/gitlab
-        - ./gitlab/data:/var/opt/gitlab
+        - /gitlab/config:/etc/gitlab
+        - /gitlab/logs:/var/log/gitlab
+        - /gitlab/data:/var/opt/gitlab
       restart: always
 
     git-runner:
@@ -32,6 +27,6 @@ services:
         POSTGRES_DB: gitlabhq_production
       restart: always
       volumes:
-        - ./postgresql/data:/var/lib/postgresql/data
+        - /gitlab/postgresql/data:/var/lib/postgresql/data
       ports:
         - 5433:5432
