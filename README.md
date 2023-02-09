@@ -10,7 +10,8 @@
 ## 2. Setup
 
 ### Step 1: Install Docker 
-####Link: [Reference links Install Docker Engine](https://docs.docker.com/engine/install/debian/)
+
+* Link: [Reference links Install Docker Engine](https://docs.docker.com/engine/install/debian/)
 
 ### Step 2: Install GitLab using Docker Compose
 
@@ -56,17 +57,17 @@ services:
 docker compose up -d
 ```
 
-####Link: [Install Gitlab by Docker compose](https://docs.gitlab.com/ee/install/docker.html)
+* Link: [Install Gitlab by Docker compose](https://docs.gitlab.com/ee/install/docker.html)
 
-#NOTE:
+**NOTE:**
 - When run docker-compose.yml make sure you are in the same directory as docker-compose.yml and start GitLab
 - User Login: root
 - Password: run command 
 ```
 cat /gitlab/config/initital_root_password
 ```
-# NOTE: This file will be automatically deleted in the first reconfigure run after 24 hours.
-# NOTE: Change ssh Port default of GITLAB in docker-compose.yml file
+**NOTE:** This file will be automatically deleted in the first reconfigure run after 24 hours.
+**NOTE:** Change ssh Port default of GITLAB in docker-compose.yml file
 
 
 
