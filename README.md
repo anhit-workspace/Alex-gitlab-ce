@@ -20,7 +20,7 @@
 version: '3'
 services:
     gitlab:
-      image: gitlab/gitlab-ce:latest
+      image: gitlab/gitlab-ce:15.8.1-ce.0
       hostname: 'localhost'
       ports:
         - '18891:80'
@@ -33,13 +33,13 @@ services:
       restart: always
 
     git-runner:
-      image: gitlab/gitlab-runner:latest
+      image: gitlab/gitlab-runner:v15.8.1
       restart: always
       links:
         - gitlab
 
     postgresql:
-      image: postgres:latest
+      image: postgres:15.1
       environment:
         POSTGRES_USER: gitlab
         POSTGRES_PASSWORD: secret
@@ -63,9 +63,10 @@ docker compose up -d
 - User Login: root
 - Password: run command 
 ```
-sudo docker exec -it grep ‘Password:’ /etc/gitlab/initial_root_password
+cat /gitlab/config/initital_root_password
 ```
-
+# NOTE: This file will be automatically deleted in the first reconfigure run after 24 hours.
+# NOTE: Change ssh Port default of GITLAB in docker-compose.yml file
 
 
 
