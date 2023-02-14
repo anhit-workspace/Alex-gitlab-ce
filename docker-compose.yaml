@@ -3,6 +3,19 @@ services:
     gitlab:
       image: gitlab/gitlab-ce:15.8.1-ce.0
       hostname: 'localhost'
+      environment:
+	GITLAB_OMNIBUS_CONFIG: |
+		gitlab_rails['ldap_enabled'] = true
+                gitlab_rails['ldap_enabled'] = {
+			'main' => {
+				'lable' => 'LDAP',
+				'host' => '192.168.45.200',
+				'port' => '389',
+				'uid' => '',
+				'encryption' => 'simple_tls',
+				'base' => 'dc=nexle,dc=com',
+			}
+		}
       ports:
         - '18891:80'
         - '18892:443'
