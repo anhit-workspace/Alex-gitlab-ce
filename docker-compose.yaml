@@ -1,8 +1,21 @@
 version: '3'
 services:
     gitlab:
-      image: gitlab/gitlab-ce:latest
+      image: gitlab/gitlab-ce:15.8.1-ce.0
       hostname: 'localhost'
+      environment:
+	GITLAB_OMNIBUS_CONFIG: |
+		gitlab_rails['ldap_enabled'] = true
+                gitlab_rails['ldap_enabled'] = {
+			'main' => {
+				'lable' => 'LDAP',
+				'host' => '192.168.1.200',
+				'port' => '389',
+				'uid' => '',
+				'encryption' => 'simple_tls',
+				'base' => 'dc=domain,dc=com',
+			}
+		}
       ports:
         - '18891:80'
         - '18892:443'
@@ -14,13 +27,13 @@ services:
       restart: always
 
     git-runner:
-      image: gitlab/gitlab-runner:latest
+      image: gitlab/gitlab-runner:v15.8.1
       restart: always
       links:
         - gitlab
 
     postgresql:
-      image: postgres:latest
+      image: postgres:15.1
       environment:
         POSTGRES_USER: gitlab
         POSTGRES_PASSWORD: secret
