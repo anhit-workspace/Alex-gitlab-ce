@@ -9,11 +9,11 @@ services:
                 gitlab_rails['ldap_enabled'] = {
 			'main' => {
 				'lable' => 'LDAP',
-				'host' => '192.168.45.200',
+				'host' => '192.168.1.200',
 				'port' => '389',
 				'uid' => '',
 				'encryption' => 'simple_tls',
-				'base' => 'dc=nexle,dc=com',
+				'base' => 'dc=domain,dc=com',
 			}
 		}
       ports:
